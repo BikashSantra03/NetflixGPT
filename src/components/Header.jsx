@@ -1,8 +1,9 @@
 import React from "react";
+import { NavLink } from "react-router";
 
 const Header = ({ showSignIn }) => {
   return (
-    <div className="absolute left-1/2 transform -translate-x-1/2 w-[822px] h-[80px] flex justify-between my-2 mx-auto">
+    <div className="absolute z-10 left-1/2 transform -translate-x-1/2 w-[822px] h-[80px] flex justify-between my-2 mx-auto">
       <div className=" w-37 h-10 ">
         <img
           className="object-cover"
@@ -16,7 +17,7 @@ const Header = ({ showSignIn }) => {
           <select
             name="Languages"
             id="langs"
-            className="bg-transparent border  m-2 px-3 py-1.5 rounded-md"
+            className="bg-transparent border  m-2 px-3 py-1.5 rounded-md cursor-pointer"
           >
             <option value="en-IN" className="text-black hover:text-white">
               English
@@ -28,9 +29,11 @@ const Header = ({ showSignIn }) => {
         </div>
         <div>
           {showSignIn && (
-            <button className="bg-[#E50914] m-2 px-3 py-1.5 rounded-md">
-              Sign In
-            </button>
+            <NavLink to="login">
+              <button className="bg-[#E50914] m-2 px-3 py-1.5 rounded-md cursor-pointer">
+                Sign In
+              </button>
+            </NavLink>
           )}
         </div>
       </div>
