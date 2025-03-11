@@ -3,6 +3,12 @@ import { backGroundIMG } from "../../utils/constatnt";
 import Header from "./Header";
 import { checkValidateDate } from "../../utils/validate";
 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../utils/firebase";
+
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -21,8 +27,45 @@ const Login = () => {
       password.current.value,
       !isSignInForm && name.current.value
     );
-
     setErrorMessage(errorMessage);
+    if (errorMessage) return;
+
+    //Sign Up process
+    !isSignInForm &&
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode);
+        });
+
+    //Sign in process
+    isSignInForm &&
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(error);
+          setErrorMessage(errorCode);
+        });
   };
 
   return (
