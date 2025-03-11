@@ -4,8 +4,10 @@ import { backGroundIMG } from "../../utils/constatnt";
 
 import Header from "./Header";
 import { ImOpt } from "react-icons/im";
+import { useNavigate } from "react-router";
 
 const DefaultPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="text-white relative h-screen overflow-hidden">
       <Header showSignIn={true} />
@@ -29,7 +31,10 @@ const DefaultPage = () => {
             className="w-2/3 border-2 border-[#2BB871] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-300"
           />
 
-          <button className="flex justify-center items-center cursor-pointer gap-3 w-1/3 bg-[#E50914] font-bold py-3.5 px-7 rounded-md">
+          <button
+            onClick={() => navigate("/login")}
+            className="flex justify-center items-center cursor-pointer gap-3 w-1/3 bg-[#E50914] font-bold py-3.5 px-7 rounded-md"
+          >
             Get Started
             <span>
               <FaGreaterThan />
