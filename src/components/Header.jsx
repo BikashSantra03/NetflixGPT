@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../../utils/store/userSlice";
 import { useNavigate } from "react-router";
 
+import { Logo } from "../../utils/constatnt";
+
 const Header = ({ showSignIn, inBrowsePage }) => {
   const user = useSelector((store) => store.user); //subscribing to store
 
@@ -45,11 +47,7 @@ const Header = ({ showSignIn, inBrowsePage }) => {
   return (
     <div className="absolute z-10 left-1/2 transform -translate-x-1/2 w-[822px] h-[80px] flex justify-between my-2 mx-auto">
       <div className=" w-37 h-10 ">
-        <img
-          className="object-cover"
-          src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-          alt="logo"
-        />
+        <img className="object-cover" src={Logo} alt="logo" />
       </div>
 
       <div className="flex wrap text-white ">
