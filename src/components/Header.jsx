@@ -45,7 +45,7 @@ const Header = ({ showSignIn, inBrowsePage }) => {
   };
 
   return (
-    <div className="absolute z-10 left-1/2 transform -translate-x-1/2 w-[822px] h-[80px] flex justify-between my-2 mx-auto">
+    <div className="absolute z-10 left-1/2 transform -translate-x-1/2 w-[822px] h-[80px] flex wrap justify-between my-2 mx-auto">
       <div className=" w-37 h-10 ">
         <img className="object-cover" src={Logo} alt="logo" />
       </div>
