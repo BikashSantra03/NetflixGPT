@@ -3,7 +3,6 @@ import { FaGreaterThan } from "react-icons/fa6";
 import { backGroundIMG } from "../../utils/constatnt";
 
 import Header from "./Header";
-import { ImOpt } from "react-icons/im";
 import { useNavigate } from "react-router";
 
 const DefaultPage = () => {

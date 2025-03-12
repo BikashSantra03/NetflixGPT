@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../../utils/firebase";
-import { useNavigate } from "react-router";
+
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/store/userSlice";
 
@@ -21,8 +21,6 @@ const Login = () => {
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -60,8 +58,6 @@ const Login = () => {
               // Profile updated! now update local redux store also
               const { uid, email, displayName } = auth.currentUser;
               dispatch(addUser({ uid: uid, email: email, name: displayName }));
-
-              navigate("/browse");
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -85,8 +81,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
