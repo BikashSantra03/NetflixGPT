@@ -9,10 +9,13 @@ import useUpcommingMovies from "../hooks/useUpcommingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import { useSelector } from "react-redux";
+import GptSearch from "./GptSearch";
 
 const Browse = () => {
   const [mainContainerLoaded, setMainContainerLoaded] = useState(false);
   const isTrailerLoaded = useSelector((store) => store.Movies.trailerVideo);
+
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   useEffect(() => {
     const simulateLoading = () => {
@@ -33,8 +36,15 @@ const Browse = () => {
   return (
     <div>
       <Header inBrowsePage={true} />
-      <MainContainer />
-      {mainContainerLoaded && <SecondaryContainer />}
+
+      {showGptSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          {mainContainerLoaded && <SecondaryContainer />}
+        </>
+      )}
     </div>
   );
 };
