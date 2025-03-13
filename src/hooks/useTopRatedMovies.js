@@ -16,8 +16,6 @@ const useTopRatedMovies = () => {
     const jsonData = await data.json();
 
     dispatch(addTopRatedMovies(jsonData.results));
-
-    console.log("Popular Movies List: ", jsonData);
   };
 
   useEffect(() => {

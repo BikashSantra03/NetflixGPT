@@ -16,8 +16,6 @@ const usePopularTvSeries = () => {
     const jsonData = await data.json();
 
     dispatch(addPopularTvSeries(jsonData.results));
-
-    console.log("Popular Movies List: ", jsonData);
   };
 
   useEffect(() => {

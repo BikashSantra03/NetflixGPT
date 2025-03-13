@@ -16,8 +16,6 @@ const useUpcommingMovies = () => {
     const jsonData = await data.json();
 
     dispatch(addUpCommingMovies(jsonData.results));
-
-    console.log("Popular Movies List: ", jsonData);
   };
 
   useEffect(() => {

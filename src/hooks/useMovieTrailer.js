@@ -17,8 +17,6 @@ export const useMovieTrailer = (movieId) => {
       (video) => video.type === "Trailer"
     );
     const trailer = trailers.length ? trailers[0] : jsonData.results[0];
-    console.log("trailer: ", trailer);
-
     dispatch(addTrailerVideo(trailer));
   };
 
