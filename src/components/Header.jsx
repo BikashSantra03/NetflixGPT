@@ -81,7 +81,7 @@ const Header = ({ showSignIn, inBrowsePage }) => {
         <div>
           {inBrowsePage && (
             <div className="flex gap-2.5 items-center text-black">
-              <h2>{user?.name}</h2>
+              <h2 onClick={() => navigate("/userprofile")}>{user?.name}</h2>
               <button
                 className="bg-[#E50914] m-2 px-3 py-1.5 rounded-md cursor-pointer text-white "
                 onClick={handleSignout}
