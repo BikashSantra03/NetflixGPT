@@ -35,7 +35,7 @@ const Browse = () => {
   usePopularTvSeries();
   return (
     <div>
-      <Header inBrowsePage={true} />
+      <Header />
 
       {showGptSearch ? (
         <GptSearch />

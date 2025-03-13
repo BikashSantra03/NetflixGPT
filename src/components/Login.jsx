@@ -93,7 +93,7 @@ const Login = () => {
   return (
     <div className="relative overflow-hidden">
       {/* Header */}
-      <Header showSignIn={false} />
+      <Header />
 
       {/* Form */}
       <form
