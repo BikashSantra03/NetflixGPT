@@ -14,7 +14,7 @@ const GptMovieSuggestion = () => {
   if (!gptMovieNames) return <Spinner />;
 
   return (
-    <div className="p-4 m-4 bg-black opacity-90">
+    <div className="p-4 m-4 bg-black opacity-85">
       {gptMovieNames?.map((movieName, index) => (
         <MovieList
           title={movieName}

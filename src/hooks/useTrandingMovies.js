@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 
 import { API_OPTIONS } from "../../utils/constatnt";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTrandingMovies } from "../../utils/store/moviesSlice";
 
 const useTrandingMovies = () => {
+  const trandingMovies = useSelector((store) => store.Movies.trandingMovies);
   const dispatch = useDispatch();
 
   const getTrandingMovies = async () => {
@@ -14,13 +15,13 @@ const useTrandingMovies = () => {
     );
 
     const jsonData = await data.json();
-    console.log(jsonData)
+    console.log(jsonData);
 
     dispatch(addTrandingMovies(jsonData.results));
   };
 
   useEffect(() => {
-    getTrandingMovies();
+    !trandingMovies && getTrandingMovies();
   }, []);
 };
 
