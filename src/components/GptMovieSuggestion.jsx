@@ -4,7 +4,12 @@ import MovieList from "./MovieList";
 import Spinner from "./Spinner";
 
 const GptMovieSuggestion = () => {
-  const { gptMovieNames, tmdbMovieResults } = useSelector((store) => store.gpt);
+  const { gptMovieNames, tmdbMovieResults, isLoading } = useSelector(
+    (store) => store.gpt
+  );
+  if (isLoading) return <Spinner />;
+
+  if (!gptMovieNames) return null;
 
   if (!gptMovieNames) return <Spinner />;
 

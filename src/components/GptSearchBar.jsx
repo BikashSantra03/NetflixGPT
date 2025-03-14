@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { model } from "../../utils/geminiAPI";
 
 import Error from "./Error";
-import { addGptMovieResult } from "../../utils/store/gptSlice";
+import { addGptMovieResult, setIsLoading } from "../../utils/store/gptSlice";
 import { API_OPTIONS } from "../../utils/constatnt";
 
 const GptSearchBar = () => {
@@ -27,28 +27,38 @@ const GptSearchBar = () => {
 
   // Get Gemini Response on the basis of input data
   const handleGptSearch = async () => {
-    dispatch(addGptMovieResult({ gptResults: null, tmdbResults: null }));
+    dispatch(setIsLoading(true));
+    try {
+      const prompt = `Act as a movie recomendation system and suggest some movies. Only give me 5 movies for the query: ${searchedText.current.value} in comma seperated format like Example result given ahead. Example result : 3 idiots, Dangal, Interstellar, Mohenjo Daro, Koi Mil Gaya . If there are not enough movies for the query then return as many as are found. Don't return any other words/suggestions`;
 
-    const prompt = `Act as a movie recomendation system and suggest some movies. Only give me 5 movies for the query: ${searchedText.current.value} in comma seperated format like Example result given ahead. Example result : 3 idiots, Dangal, Interstellar, Mohenjo Daro, Koi Mil Gaya . If there are not enough movies for the query then return as many as are found. Don't return any other words/suggestions`;
+      const searchResult = await model.generateContent(prompt);
 
-    const searchResult = await model.generateContent(prompt);
+      if (!searchResult) {
+        dispatch(setIsLoading(false));
+        return <Error />;
+      }
 
-    if (!searchResult) return <Error />;
+      const gptMovies = searchResult.response
+        .text()
+        .split(",")
+        .map((movie) => movie.trim());
 
-    const gptMovies = searchResult.response
-      .text()
-      .split(",")
-      .map((movie) => movie.trim());
-    console.log(gptMovies);
+      const promiseResults = gptMovies.map((movie) => searchMovieIMDB(movie));
 
-    const promiseResults = gptMovies.map((movie) => searchMovieIMDB(movie));
+      const tmdbResults = await Promise.all(promiseResults);
 
-    const tmdbResults = await Promise.all(promiseResults);
-    console.log(tmdbResults);
+      dispatch(
+        addGptMovieResult({ gptResults: gptMovies, tmdbResults: tmdbResults })
+      );
+    } catch (error) {
+      console.error("Error during GPT search:", error);
 
-    dispatch(
-      addGptMovieResult({ gptResults: gptMovies, tmdbResults: tmdbResults })
-    );
+      dispatch(setIsLoading(false)); // Set isLoading to false on error
+
+      return <Error />;
+    } finally {
+      dispatch(setIsLoading(false)); // Set isLoading to false after completion (success or error)
+    }
   };
 
   return (
