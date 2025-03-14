@@ -14,6 +14,7 @@ const useTrandingMovies = () => {
     );
 
     const jsonData = await data.json();
+    console.log(jsonData)
 
     dispatch(addTrandingMovies(jsonData.results));
   };
