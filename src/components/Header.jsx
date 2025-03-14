@@ -96,7 +96,7 @@ const Header = ({ showSignIn }) => {
               <h2 onClick={() => navigate("/userprofile")}>{user?.name}</h2>
               <button
                 onClick={handleGptSearchClick}
-                className="py-2 px-4 mx-2 my-4 bg-purple-800 text-white font-medium rounded-md"
+                className="py-2 px-4 mx-2 my-4 bg-purple-800 text-white font-medium rounded-md cursor-pointer"
               >
                 {showGptSearch ? "Home Page" : "GPT Search"}
               </button>

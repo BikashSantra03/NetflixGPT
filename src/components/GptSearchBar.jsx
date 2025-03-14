@@ -1,9 +1,56 @@
-import React from "react";
+import React, { useRef } from "react";
 import { language } from "../../utils/languageConstants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { model } from "../../utils/geminiAPI";
+
+import Error from "./Error";
+import { addGptMovieResult } from "../../utils/store/gptSlice";
+import { API_OPTIONS } from "../../utils/constatnt";
 
 const GptSearchBar = () => {
+  const searchedText = useRef(null);
+
   const langSelector = useSelector((store) => store.langConfig.lang);
+
+  const dispatch = useDispatch();
+
+  //Search movie from TMDB
+  const searchMovieIMDB = async (movie) => {
+    const data = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=true&language=en-US&page=1`,
+      API_OPTIONS
+    );
+    const jsonData = await data.json();
+
+    return jsonData.results;
+  };
+
+  // Get Gemini Response on the basis of input data
+  const handleGptSearch = async () => {
+    dispatch(addGptMovieResult({ gptResults: null, tmdbResults: null }));
+
+    const prompt = `Act as a movie recomendation system and suggest some movies. Only give me 5 movies for the query: ${searchedText.current.value} in comma seperated format like Example result given ahead. Example result : 3 idiots, Dangal, Interstellar, Mohenjo Daro, Koi Mil Gaya . If there are not enough movies for the query then return as many as are found. Don't return any other words/suggestions`;
+
+    const searchResult = await model.generateContent(prompt);
+
+    if (!searchResult) return <Error />;
+
+    const gptMovies = searchResult.response
+      .text()
+      .split(",")
+      .map((movie) => movie.trim());
+    console.log(gptMovies);
+
+    const promiseResults = gptMovies.map((movie) => searchMovieIMDB(movie));
+
+    const tmdbResults = await Promise.all(promiseResults);
+    console.log(tmdbResults);
+
+    dispatch(
+      addGptMovieResult({ gptResults: gptMovies, tmdbResults: tmdbResults })
+    );
+  };
+
   return (
     <div className="flex justify-center pt-[10%]">
       <form
@@ -13,10 +60,14 @@ const GptSearchBar = () => {
       >
         <input
           type="text"
+          ref={searchedText}
           placeholder={language[langSelector].gptSearPlaceHolder}
           className="p-4 m-4 col-span-9 bg-white"
         />
-        <button className="m-4 py-3 px-4 col-span-3 bg-red-700 text-white rounded-lg cursor-pointer">
+        <button
+          onClick={handleGptSearch}
+          className="m-4 py-3 px-4 col-span-3 bg-red-700 text-white rounded-lg cursor-pointer"
+        >
           {language[langSelector].search}
         </button>
       </form>
