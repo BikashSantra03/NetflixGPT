@@ -56,12 +56,12 @@ const Header = ({ showSignIn }) => {
   };
 
   return (
-    <div className="absolute z-10 left-1/2 transform -translate-x-1/2 w-11/12 h-[80px] flex wrap justify-between my-2 mx-auto">
-      <div className=" w-45 h-20">
+    <div className="absolute z-10 left-1/2 transform -translate-x-1/2 w-full md:w-11/12 h-[20px] md:h-[80px] flex flex-col md:flex-row wrap justify-between my-2 mx-auto">
+      <div className=" w-45 h-20 mx-auto md:mx-0">
         <img className="object-cover" src={Logo} alt="logo" />
       </div>
 
-      <div className="flex justify-center items-center gap-1 ">
+      <div className="flex justify-between items-center gap-1 ">
         {showGptSearch && (
           <div>
             <select
@@ -98,7 +98,7 @@ const Header = ({ showSignIn }) => {
                 onClick={handleGptSearchClick}
                 className="py-2 px-4 mx-2 my-4 bg-purple-800 text-white font-medium rounded-md cursor-pointer"
               >
-                {showGptSearch ? "Home Page" : "GPT Search"}
+                {showGptSearch ? "HomePage" : "GPT Search"}
               </button>
               <button
                 className="bg-[#E50914] py-2 px-2 mx-4 my-4 font-medium rounded-md cursor-pointer text-white "

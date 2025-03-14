@@ -99,7 +99,7 @@ const Login = () => {
       <form
         onSubmit={(e) => e.preventDefault()}
         action=""
-        className="w-2/7 absolute z-20 px-12 py-8 bg-black opacity-80 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white rounded-lg"
+        className="w-6/7 md:w-2/7 absolute z-20 px-12 py-8 bg-black opacity-80 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white rounded-lg"
       >
         <h1 className="font-bold text-3xl py-2">
           {isSignInForm ? "Sign in" : "Sign Up"}
@@ -148,7 +148,7 @@ const Login = () => {
         <img
           src={backGroundIMG}
           alt="Movies-Poster"
-          className="w-full h-full object-cover"
+          className="w-full h-screen object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-40"></div>
       </div>

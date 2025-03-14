@@ -4,7 +4,7 @@ export const language = {
     gptSearPlaceHolder: "What do you want to watch today?",
   },
   bengali: {
-    search: "অনুসন্ধান করুন",
+    search: "অনুসন্ধান",
     gptSearPlaceHolder: "আজ তুমি কী দেখতে চাও?",
   },
   hindi: {

@@ -11,11 +11,11 @@ const DefaultPage = () => {
     <div className="text-white relative h-screen overflow-hidden">
       <Header showSignIn={true} />
 
-      <div className="absolute z-9 flex flex-col wrap gap-6 w-140 h-70 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/7 text-center">
-        <h1 className="text-5xl font-extrabold">
+      <div className="absolute z-9 flex flex-col wrap gap-3 md:gap-6 w-90 md:w-140 h-60 md:h-70 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/7 text-center">
+        <h1 className="text-3xl md:text-5xl  font-extrabold">
           Unlimited movies, TV shows and more
         </h1>
-        <p className="text-2xl font-bold ">
+        <p className="text-xl md:text-2xl font-bold ">
           Starts at ₹149. Cancel at any time.
         </p>
 
@@ -32,9 +32,9 @@ const DefaultPage = () => {
 
           <button
             onClick={() => navigate("/login")}
-            className="flex justify-center items-center cursor-pointer gap-3 w-1/3 bg-[#E50914] font-bold py-3.5 px-7 rounded-md"
+            className="flex justify-center items-center cursor-pointer gap-2 md:gap-3 w-1/3 bg-[#E50914] font-bold py-3.5 px-7 rounded-md"
           >
-            Get Started
+            GetStarted
             <span>
               <FaGreaterThan />
             </span>
@@ -45,7 +45,7 @@ const DefaultPage = () => {
         <img
           src={backGroundIMG}
           alt="Movies-Poster"
-          className="w-full h-full object-cover"
+          className="w-full h-screen object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-70"></div>
       </div>
